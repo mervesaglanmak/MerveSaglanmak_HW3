@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -71,13 +71,13 @@ namespace CetBookStore.Controllers
                 books = books.Where(b => b.CategoryId == searchModel.CategoryId.Value);
             }
 
-            if (searchModel.MinPrice.HasValue)
+            if (searchModel.MinimumPrice.HasValue)
             {
-                books = books.Where(b => b.Price >= searchModel.MinPrice.Value);
+                books = books.Where(b => b.Price >= searchModel.MinimumPrice.Value);
             }
-            if (searchModel.MaxPrice.HasValue)
+            if (searchModel.MaximumPrice.HasValue)
             {
-                books = books.Where(b => b.Price >= searchModel.MaxPrice.Value);
+                books = books.Where(b => b.Price >= searchModel.MaximumPrice.Value);
             }
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name",searchModel.CategoryId);
             searchModel.Results= await books.ToListAsync();

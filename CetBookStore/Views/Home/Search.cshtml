@@ -1,4 +1,4 @@
-﻿@model CetBookStore.ViewModel.SearchViewModel
+@model CetBookStore.ViewModel.SearchViewModel
 @{
     ViewData["Title"] = "Search";
 }
@@ -23,10 +23,10 @@
                 </select>
             </div>
             <div class="">
-                <label asp-for="MinPrice" class="control-label"></label>
-                <input type="number" class="form-control" asp-for="MinPrice" maxlength="6">
-                <label asp-for="MaxPrice" class="control-label"></label>
-                <input type="number" class="form-control" asp-for="MaxPrice" maxlength="6">
+                <label asp-for="MinimumPrice" class="control-label"></label>
+                <input type="number" class="form-control" asp-for="MinimumPrice" maxlength="6">
+                <label asp-for="MaximumPrice" class="control-label"></label>
+                <input type="number" class="form-control" asp-for="MaximumPrice" maxlength="6">
             </div>
             <div class="form-group">
                 <input type="submit" value="Ara" class="btn btn-primary"/>
