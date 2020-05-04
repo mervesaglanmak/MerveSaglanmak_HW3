@@ -26,12 +26,4 @@
     <None Include="wwwroot\UserImages\02dd51ad-2853-4b55-a0f1-6fa11fbeb0c9_cshparbook.jpg" />
   </ItemGroup>
 
-
-  <ItemGroup>
-    <Content Update="Views\Shared\_SearchPartial.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
-
 </Project>

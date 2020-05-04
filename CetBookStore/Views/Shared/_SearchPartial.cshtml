@@ -1,14 +1,38 @@
+@model CetBookStore.ViewModel.SearchViewModel
 
-@{
-    ViewData["Title"] = "Search";
+<div class="col-lg-5 col-12 order-lg-2 order-3 text-lg-left text-right">
 
-}
+    <div class="header_search">
+        <div class="header_search_content">
+            <div class="header_search_form_container">
+                <div class="header_search_form">
+                    <form asp-controller="Home" asp-action="Search" class="header_search_form clearfix">
 
-<div class="col-md-4">
-    <form asp-action="Search">
-        <div class="form-group">
-            <input name="searchText" class="form-control" placeholder="Arama Metni"/>
-            <input type="submit" value="Ara" class="btn btn-primary"/>
-        </div>    
-    </form>
+                        <input type="search" placeholder="Ara" required="required" class="header_search_input" asp-for="SearchText">
+
+                        <div class="custom_dropdown">
+                            <div class="custom_dropdown_list">
+                                <span class="custom_dropdown_placeholder clc">Tum Kategoriler</span>
+                                <i class="fas fa-chevron-down"></i>
+                                <ul class="custom_list clc">
+                                        
+
+                                    <li>
+                                        <select asp-for="CategoryId" asp-items="ViewBag.CategoryId">
+                                            <option value=""> Tüm Kategoriler </option>
+                                            <option asp-for="CategoryId" asp-items="ViewBag.CategoryId"> </option>
+                                        </select>
+                                    </li>
+                                        
+                                </ul>
+                            </div>
+                        </div>
+
+                        <button class="header_search_button trans_300" type="submit" value="Submit"><img alt="" src="~/images/search.png"></button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

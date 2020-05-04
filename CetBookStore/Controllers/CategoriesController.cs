@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CetBookStore.Data;
 using CetBookStore.Models;
-using CetBookStore.ViewModel;
 
 namespace CetBookStore.Controllers
 {
@@ -151,15 +150,6 @@ namespace CetBookStore.Controllers
         private bool CategoryExists(int id)
         {
             return _context.Categories.Any(e => e.Id == id);
-        }
-        
-        [HttpPost]
-        public async Task<IActionResult> Search(string searchText)
-        {
-            var searchModel = new SearchViewModel();
-            searchModel.SearchText = searchText;
-            searchModel.SearchInDescription = true;
-            return RedirectToAction("Search", "Home", searchModel );
         }
     }
 }

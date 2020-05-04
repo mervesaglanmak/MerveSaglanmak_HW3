@@ -3,110 +3,133 @@
     ViewData["Title"] = "Search";
 }
 
-<h1>Search</h1>
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Search">
-            <div class="form-group">
-                <label asp-for="SearchText" class="control-label"></label>
-                <input asp-for="SearchText" class="form-control"/>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="SearchInDescription"/> @Html.DisplayNameFor(model => model.SearchInDescription)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="CategoryId" class="control-label"></label>
-                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId">
-                    <option value=""> Tüm Kategoriler </option>
-                </select>
-            </div>
-            <div class="">
-                <label asp-for="MinPrice" class="control-label"></label>
-                <input type="number" class="form-control" asp-for="MinPrice" maxlength="6">
-                <label asp-for="MaxPrice" class="control-label"></label>
-                <input type="number" class="form-control" asp-for="MaxPrice" maxlength="6">
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Ara" class="btn btn-primary"/>
-            </div>
-        </form>
+<head>
+    <title>OneTech</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="OneTech shop project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/styles/bootstrap4/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="~/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css">
+    <link href="~/plugins/OwlCarousel2-2.2.1/owl.carousel.css" rel="stylesheet" type="text/css">
+    <link href="~/plugins/OwlCarousel2-2.2.1/owl.theme.default.css" rel="stylesheet" type="text/css">
+    <link href="~/plugins/OwlCarousel2-2.2.1/animate.css" rel="stylesheet" type="text/css">
+    <link href="~/plugins/slick-1.8.0/slick.css" rel="stylesheet" type="text/css">
+    <link href="~/styles/main_styles.css" rel="stylesheet" type="text/css">
+    <link href="~/styles/responsive.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<div style="padding-left:250px ; padding-top:50px">
+    <h1>Arama Sonucu</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Search">
+                <div class="form-group">
+                    <label asp-for="SearchText" class="control-label"></label>
+                    <input asp-for="SearchText" class="form-control"/>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="SearchInDescription"/> @Html.DisplayNameFor(model => model.SearchInDescription)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CategoryId" class="control-label"></label>
+                    <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId">
+                        <option value=""> Tüm Kategoriler </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="MinPrice" class="control-label"></label>
+                    <input type="number" class="form-control" asp-for="MinPrice" maxlength="6">
+                    <label asp-for="MaxPrice" class="control-label"></label>
+                    <input type="number" class="form-control" asp-for="MaxPrice" maxlength="6">
+                </div>
+
+
+                <div class="form-group">
+                    <input type="submit" value="Ara" class="btn btn-primary"/>
+                </div>
+            </form>
+        </div>
+
     </div>
+    @if (Model?.Results != null)
+    {
+        <h3> Arama Sonuçları</h3>
+        <h5> @Model.Results.Count Adet Kitap bulundu. </h5>
+
+        <div class="row">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>
+                        Başlık
+                    </th>
+                    <th>
+                        Sayfa Sayısı
+                    </th>
+                    <th>
+                        Yazarlar
+                    </th>
+                    <th>
+                        Açıklama
+                    </th>
+                    <th>
+                        Fiyat
+                    </th>
+                    <th>
+                        Basım Yılı
+                    </th>
+                    <th>
+                        Stok Bilgisi
+                    </th>
+                    <th>
+                        Kategori
+                    </th>
+
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model.Results)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PageCount)
+                        </td>
+                        <td>
+                            @item.Authors
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @item.Price
+                            @*@Html.DisplayFor(modelItem => item.Price)*@
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PressYear)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StockCount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Category.Name)
+                        </td>
+                        <td>
+                            <a asp-controller="Books" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
 
 </div>
-@if (Model?.Results != null)
-{
-    <h3> Arama Sonuçları</h3>
-    <h5> @Model.Results.Count Adet Kitap bulundu. </h5>
-
-    <div class="row">
-        <table class="table">
-            <thead>
-            <tr>
-                <th>
-                    Başlık
-                </th>
-                <th>
-                    Sayfa Sayısı
-                </th>
-                <th>
-                    Yazarlar
-                </th>
-                <th>
-                    Açıklama
-                </th>
-                <th>
-                    Fiyat
-                </th>
-                <th>
-                    Basım Yılı
-                </th>
-                <th>
-                    Stok Bilgisi
-                </th>
-                <th>
-                    Kategori
-                </th>
-
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach (var item in Model.Results)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PageCount)
-                    </td>
-                    <td>
-                        @item.Authors
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @item.Price
-                        @*@Html.DisplayFor(modelItem => item.Price)*@
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PressYear)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StockCount)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Category.Name)
-                    </td>
-                    <td>
-                        <a asp-controller="Books" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                    </td>
-                </tr>
-            }
-            </tbody>
-        </table>
-    </div>
-}

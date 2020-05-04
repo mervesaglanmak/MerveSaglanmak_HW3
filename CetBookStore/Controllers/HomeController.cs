@@ -45,9 +45,6 @@ namespace CetBookStore.Controllers
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
             return View();
         }
-
-        
-
         [HttpPost]
         public async Task<IActionResult> Search(SearchViewModel searchModel)
         {
@@ -71,14 +68,17 @@ namespace CetBookStore.Controllers
                 books = books.Where(b => b.CategoryId == searchModel.CategoryId.Value);
             }
 
+
             if (searchModel.MinPrice.HasValue)
             {
                 books = books.Where(b => b.Price >= searchModel.MinPrice.Value);
             }
+
             if (searchModel.MaxPrice.HasValue)
             {
-                books = books.Where(b => b.Price >= searchModel.MaxPrice.Value);
+                books = books.Where(b => b.Price <= searchModel.MaxPrice.Value);
             }
+
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name",searchModel.CategoryId);
             searchModel.Results= await books.ToListAsync();
             return View(searchModel);
