@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -16,9 +16,9 @@ namespace CetBookStore.ViewModel
         public int? CategoryId { get; set; }
         
         [Display(Name ="Alt Limit")]
-        public int? MinPrice { get; set; }
+        public int? MinimumPrice { get; set; }
         [Display(Name ="Üst Limit")]
-        public int? MaxPrice { get; set; }
+        public int? MaximumPrice { get; set; }
 
         public List<Models.Book> Results { get; set; }
     }
